@@ -33,7 +33,7 @@ AsyncHttpClient aClient;
 EXAMPLES
 --------
 
-**Homebridge example**
+**Homebridge example**  
 POST request with JSON data
 ```
 String stateValue = (state == "off") ? "false" : "true";
@@ -42,7 +42,7 @@ aClient.init("POST","http://10.0.0.30:8081/lamp1", "application/json", PostData)
 aClient.send();
 ```
 
-**Other examples**
+**Other examples**  
 Simple GET request to google.at
 ```
 aClient.init("GET","http://google.at");
@@ -55,13 +55,16 @@ aClient.init("GET","http://server.com/push.php?firstname=Jonathan&lastname=Strau
 aClient.send();
 ```
 
-Set all arguments one by one
-```
+*Set all arguments one by one*
+
 For GET and POST:
+```
 aClient.setType("GET");
 aClient.setFullURL("http://server.com:8080/");
+```
 
 Only for POST:
+```
 aClient.setDataMode("application/x-www-form-urlencoded");
 aClient.setData("value=123&number=123");
 ```
