@@ -1,7 +1,20 @@
+/*
+  AsyncHttpClient.cpp - Library for sending simple data via HTTP GET/POST.
+  Created by Jonathan Strauss, July 27, 2020.
+*/
+
 #include "Arduino.h"
 #include "ESPAsyncTCP.h"
 #include "AsyncHttpClient.h"
 
+/*
+
+    String type = POST or GET (most used for POST)
+    String fullUrl = full URL e.g. http://server.com:8080/push.php or http://server.com or http://server.com:8081
+    String dataMode = only for POST - Content Type --> e.g. application/json , application/x-www-form-urlencoded
+    String data = data to submit --> depends on Type (GET/POST) e.g. (application/x-www-form-urlencoded) api-key=1asnd12i3kas&firstname=Jonathan&lastname=Strauss or (application/json) {"api-key": "1asnd12i3kas", "firstname": "Jonathan", "lastname": "Strauss"}
+
+*/
 void AsyncHttpClient::init(String type, String fullUrl, String dataMode, String data)
 {
     _type = type;
@@ -10,6 +23,12 @@ void AsyncHttpClient::init(String type, String fullUrl, String dataMode, String 
     _data = data;
     getHostname(fullUrl);
 }
+
+/*
+
+    String type = POST or GET (most used for GET)
+    String fullUrl = full URL e.g. http://server.com:8080/push.php?api-key=1asnd12i3kas&firstname=Jonathan&lastname=Strauss  or http://server.com or http://server.com:8081
+*/
 
 void AsyncHttpClient::init(String type, String fullUrl)
 {
