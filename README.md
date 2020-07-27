@@ -49,7 +49,7 @@ aClient.init("GET","http://google.at");
 aClient.send();
 ```
 
-Simple GET request to google.at
+Simple GET request with GET Data passed via URL
 ```
 aClient.init("GET","http://server.com/push.php?firstname=Jonathan&lastname=Strauss");
 aClient.send();
