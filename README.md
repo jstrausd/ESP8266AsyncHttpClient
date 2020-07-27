@@ -1,6 +1,6 @@
 AsyncHttpClient
 ===============
-A asynchronous HTTP client for the ESP8266 that uses ESPAsyncTCP.
+A asynchronous HTTP client for the ESP8266 that uses [ESPAsyncTCP](https://github.com/me-no-dev/ESPAsyncTCP).
 
 IDEA
 ----
