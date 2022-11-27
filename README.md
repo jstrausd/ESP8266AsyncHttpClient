@@ -68,3 +68,10 @@ Only for POST:
 aClient.setDataMode("application/x-www-form-urlencoded");
 aClient.setData("value=123&number=123");
 ```
+
+*Debug*
+```
+a.Client.setDebug(true);
+aClient.init("GET","http://google.at");
+aClient.send();
+```

@@ -17,6 +17,7 @@ struct AsyncHttpClient
     int _port;
     String _dataMode;
     String _data;
+    bool _debug = false;
     void getHostname(String url);
     AsyncClient *aClient = NULL;
 
@@ -26,6 +27,7 @@ struct AsyncHttpClient
     void setFullURL(String fullUrl);
     void setDataMode(String dataMode);
     void setData(String data);
+    void setDebug(bool debug);
     void send();
 };
 

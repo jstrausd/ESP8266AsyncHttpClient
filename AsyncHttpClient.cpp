@@ -51,6 +51,12 @@ void AsyncHttpClient::setData(String data){
     _data = data;
 }
 
+
+void AsyncHttpClient::setDebug(bool debug){
+    _debug = debug;
+}
+
+
 /*
 
     SUBTRACT Hostname and Port from URL
@@ -100,7 +106,7 @@ void AsyncHttpClient::getHostname(String url)
 
 void AsyncHttpClient::send()
 {
-    Serial.println("Type: " + _type + " URL: " + _fullUrl + " DataMode: " + _dataMode + " Data: " + _data);
+    if(_debug) Serial.println("Type: " + _type + " URL: " + _fullUrl + " DataMode: " + _dataMode + " Data: " + _data);
 
     if (_hostname.length() <= 0) {
 		Serial.println("Hostname is not defined");
@@ -122,12 +128,12 @@ void AsyncHttpClient::send()
 		return;
 	}
 
-    if (_dataMode.length() <= 0) {
+    if (_type == "POST" && _dataMode.length() <= 0) {
 		Serial.println("DataMode is not defined");
 		return;
 	}
 
-    if (_data.length() <= 0) {
+    if (_type == "POST" && _data.length() <= 0) {
 		Serial.println("Data is not defined");
 		return;
 	}
@@ -146,21 +152,23 @@ void AsyncHttpClient::send()
     },NULL);
 
     aClient->onConnect([&](void *arg, AsyncClient *client) {
-        Serial.println("Connected");
+        Serial.println("[AsyncHttpClient] Connected");
         aClient->onError(NULL, NULL);
 
         client->onDisconnect([&](void *arg, AsyncClient *c) {
-            Serial.println("Disconnected");
+            Serial.println("[AsyncHttpClient] Disconnected");
             aClient = NULL;
             delete c;
         },NULL);
 
         client->onData([&](void *arg, AsyncClient *c, void *data, size_t len) {
+            if(_debug){
             Serial.print("\r\nResponse: ");
             Serial.println(len);
             uint8_t *d = (uint8_t *)data;
             for (size_t i = 0; i < len; i++)
                 Serial.write(d[i]);
+            }
         },NULL);
 
         //send the request
@@ -178,7 +186,7 @@ void AsyncHttpClient::send()
 
     if (!aClient->connect(_hostname.c_str(), _port))
     {
-        Serial.println("Connect Fail");
+        Serial.println("[AsyncHttpClient] Connect Fail");
         AsyncClient *client = aClient;
         aClient = NULL;
         delete client;
