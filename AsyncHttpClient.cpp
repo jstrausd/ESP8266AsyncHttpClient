@@ -83,8 +83,10 @@ void AsyncHttpClient::getHostname(String url)
     if (index > 0)
     {
         hostPart = url.substring(0, index);
+        _fullUrl = url.substring(index); // For GET request
     }else{
         hostPart = url;
+        _fullUrl = "/"; // no URL requested for proper GET request
     }
 
     url.remove(0, index);
@@ -102,6 +104,7 @@ void AsyncHttpClient::getHostname(String url)
     {
         _hostname = hostPart;
     }
+    
 }
 
 void AsyncHttpClient::send()
