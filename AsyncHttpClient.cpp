@@ -103,8 +103,7 @@ void AsyncHttpClient::getHostname(String url)
     else
     {
         _hostname = hostPart;
-    }
-    
+    }    
 }
 
 void AsyncHttpClient::send()
